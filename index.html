@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Calculate | Professional Land Converter</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+        :root {
+            --accent: #00f2fe;
+            --primary: #4facfe;
+            --bg: #0a0a0c;
+            --card: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+        body {
+            background-color: var(--bg);
+            background-image: radial-gradient(circle at 10% 10%, rgba(79, 172, 254, 0.1) 0%, transparent 50%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: white;
+        }
+
+        .main-container { width: 100%; max-width: 580px; text-align: center; }
+
+        .brand-name {
+            font-size: 64px;
+            font-weight: 900;
+            letter-spacing: -3px;
+            text-transform: uppercase;
+            background: linear-gradient(to bottom, #fff, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .converter-card {
+            background: var(--card);
+            backdrop-filter: blur(40px);
+            border: 1px solid var(--border);
+            border-radius: 40px;
+            padding: 40px;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.7);
+        }
+
+        .form-group { margin-bottom: 20px; text-align: left; }
+
+        label { 
+            display: block; 
+            font-size: 10px; 
+            font-weight: 700; 
+            color: #666; 
+            text-transform: uppercase; 
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 16px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            color: white;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        select:focus, input:focus { border-color: var(--primary); background: rgba(255,255,255,0.05); }
+
+        .conversion-flex {
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+            margin-top: 5px;
+        }
+
+        .swap-circle {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            flex-shrink: 0;
+            box-shadow: 0 10px 20px rgba(79, 172, 254, 0.3);
+            transition: 0.4s;
+        }
+
+        .swap-circle:hover { transform: rotate(180deg) scale(1.05); }
+
+        .result-box {
+            margin-top: 30px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 25px;
+        }
+
+        .state-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(79, 172, 254, 0.15);
+            color: var(--primary);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .res-value { font-size: 40px; font-weight: 800; color: #fff; display: block; }
+        .res-unit { color: #888; font-size: 14px; margin-top: 5px; display: block; }
+
+        footer { margin-top: 25px; font-size: 10px; color: #333; letter-spacing: 1px; }
+
+        option { background: #111; }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <h1 class="brand-name">Real Calculate</h1>
+
+    <div class="converter-card">
+        <div class="form-group">
+            <label>Select State</label>
+            <select id="stateSelect" onchange="calculate()">
+                <option value="Haryana">Haryana</option>
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Rajasthan">Rajasthan</option>
+                <option value="Bihar">Bihar</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                <option value="West Bengal">West Bengal</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Input Quantity</label>
+            <input type="number" id="inputQty" value="1" oninput="calculate()">
+        </div>
+
+        <div class="conversion-flex">
+            <div style="flex:1; text-align:left;">
+                <label>From</label>
+                <select id="fromUnit" onchange="calculate()">
+                    <option value="8.91359">Gaj (8.91)</option>
+                    <option value="9">Standard Gaj (9.0)</option>
+                    <option value="1">Square Feet</option>
+                    <option value="27225">Bigha (Pucca)</option>
+                    <option value="9075">Bigha (Kucha)</option>
+                    <option value="1361.25">Biswa</option>
+                    <option value="43560">Acre</option>
+                    <option value="10.7639">Square Meter</option>
+                    <option value="5445">Kanal</option>
+                    <option value="272.25">Marla</option>
+                    <option value="435.6">Cent</option>
+                    <option value="1089">Guntha</option>
+                    <option value="2400">Ground</option>
+                    <option value="72">Ankanam</option>
+                    <option value="144">Square Inch</option>
+                    <option value="107639">Hectare</option>
+                    <option value="600">Kattha</option>
+                    <option value="182.25">Chatak</option>
+                    <option value="40">Dhur</option>
+                    <option value="3600">Decimal</option>
+                    <option value="10890">Rood</option>
+                </select>
+            </div>
+
+            <button class="swap-circle" onclick="swap()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16V4M7 4L3 8M7 4L11 8M17 8v12M17 20l4-4M17 20l-4-4"/></svg>
+            </button>
+
+            <div style="flex:1; text-align:left;">
+                <label>To</label>
+                <select id="toUnit" onchange="calculate()">
+                    <option value="1">Square Feet</option>
+                    <option value="8.91359">Gaj (8.91)</option>
+                    <option value="9">Standard Gaj (9.0)</option>
+                    <option value="27225">Bigha (Pucca)</option>
+                    <option value="9075">Bigha (Kucha)</option>
+                    <option value="1361.25">Biswa</option>
+                    <option value="43560">Acre</option>
+                    <option value="10.7639">Square Meter</option>
+                    <option value="5445">Kanal</option>
+                    <option value="272.25">Marla</option>
+                    <option value="435.6">Cent</option>
+                    <option value="1089">Guntha</option>
+                    <option value="2400">Ground</option>
+                    <option value="72">Ankanam</option>
+                    <option value="144">Square Inch</option>
+                    <option value="107639">Hectare</option>
+                    <option value="600">Kattha</option>
+                    <option value="182.25">Chatak</option>
+                    <option value="40">Dhur</option>
+                    <option value="3600">Decimal</option>
+                    <option value="10890">Rood</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="result-box">
+            <div class="state-badge" id="stateDisplay">HARYANA</div>
+            <div class="res-value" id="resVal">8.91</div>
+            <span class="res-unit" id="resUnit">Square Feet</span>
+        </div>
+    </div>
+    <footer>REAL CALCULATE ENGINE • HIGH PRECISION DATA</footer>
+</div>
+
+<script>
+    function calculate() {
+        const qty = document.getElementById('inputQty').value || 0;
+        const fromFactor = document.getElementById('fromUnit').value;
+        const toFactor = document.getElementById('toUnit').value;
+        const state = document.getElementById('stateSelect').value;
+        
+        // Logical Calculation
+        const result = (qty * fromFactor) / toFactor;
+        
+        // Display Result
+        document.getElementById('resVal').innerText = result.toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 4
+        });
+
+        // Update Labels
+        const toSel = document.getElementById('toUnit');
+        document.getElementById('resUnit').innerText = "Total " + toSel.options[toSel.selectedIndex].text;
+        document.getElementById('stateDisplay').innerText = "Data for: " + state;
+    }
+
+    function swap() {
+        const from = document.getElementById('fromUnit');
+        const to = document.getElementById('toUnit');
+        const temp = from.value;
+        from.value = to.value;
+        to.value = temp;
+        calculate();
+    }
+
+    window.onload = calculate;
+</script>
+
+</body>
+</html>
